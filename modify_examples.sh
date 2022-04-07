@@ -36,16 +36,16 @@ ls -R
 
 
 #2. 
-echo "\n 2. Making file in dir2 and itself uppercase without recursion - 'modify.sh -u dir2/file4.txt dir2/file5.txt dir2' \n"
+echo "\n 2. Making files in dir2 and itself uppercase without recursion - 'modify.sh -u dir2/file4.txt dir2/file5.txt dir2' \n"
 
 bash ../modify.sh -u dir2/file4.txt dir2/file5.txt dir2
 echo "\nAfter Completion"
 
-echo "\n 2.1 Please note for this case the order is important and if the user attempted 'modify.sh -u dir2 dir2/file4.txt dir2/file5.txt' the name of the dir2 would first be changed to DIR2 and then the program would not be able to find dir2/file4.txt & dir2/file5.txt"
+echo "\n 2.1 Please note for this case the order is important and if the user attempted 'modify.sh -u dir2 dir2/file4.txt dir2/file5.txt' the name of the dir2 would first be changed to DIR2 and then the program would not be able to find the files dir2/file4.txt & dir2/file5.txt"
 ls -R
 
 #3
-echo "\n 3. Recursively making whole of DIR1 & DIR2 directories lowercase  - 'modify.sh -r -l DIR1 DIR2' \n"
+echo "\n 3. Recursively making directories DIR1 & DIR2 and everything in them lowercase  - 'modify.sh -r -l DIR1 DIR2' \n"
 
 bash ../modify.sh -r -l DIR1 DIR2
 echo "\nAfter Completion"
@@ -73,7 +73,7 @@ echo "\nAfter Completion"
 ls -R
 
 #7
-echo "\n 7. Using sed to change file extensions recursively in the whole root (./) directory- '../modify.sh -r 's/\.txt/\.newext/' ./' \n"
+echo "\n 7. Using sed to change file extensions recursively in the whole root (./) directory- 'modify.sh -r 's/\.txt/\.newext/' ./' \n"
 
 bash ../modify.sh -r 's/\.txt/\.newext/' ./
 echo "\nAfter Completion"
@@ -86,12 +86,31 @@ bash ../modify.sh -r -l dir3
 echo "\nAfter Completion"
 ls -R
 
-#9
-echo "\n 9. Try to operate on empty directory - '../modify.sh -r -l dir3' \n"
+#9 
+echo "\n 9. Making everything in the root directory uppercase recursively - 'modify.sh -r -u ./' \n"
 
-bash ../modify.sh -r -l dir3
+bash ../modify.sh -r -u ./
 echo "\nAfter Completion"
 ls -R
+
+#10
+echo "\n 10. Changing the name of the program itself- 'modify.sh -r -u ../' \n"
+
+echo "BEFORE -- THE FOLDER CONTANING THE PROGRAM\n"
+cd ..
+ls
+echo
+cd testing
+bash ../modify.sh -r -u ../
+echo "\nAfter Completion"
+cd .. 
+ls 
+echo "All the subfolders/files have been uppercased as well"
+echo 
+echo "Reverting to Orginal program names - './MODIFY.SH -l TESTING MODIFY.SH MODIFY_EXAMPLES.SH'"
+bash ./MODIFY.SH -l TESTING MODIFY.SH MODIFY_EXAMPLES.SH
+echo
+ls
 
 
 
