@@ -93,24 +93,6 @@ bash ../modify.sh -r -u ./
 echo "\nAfter Completion"
 ls -R
 
-#10
-echo "\n 10. Changing the name of the program itself- 'modify.sh -r -u ../' \n"
-
-echo "BEFORE -- THE FOLDER CONTANING THE PROGRAM\n"
-cd ..
-ls
-echo
-cd testing
-bash ../modify.sh -r -u ../
-echo "\nAfter Completion"
-cd .. 
-ls 
-echo "All the subfolders/files have been uppercased as well"
-echo 
-echo "Reverting to Orginal program names - './MODIFY.SH -l TESTING MODIFY.SH MODIFY_EXAMPLES.SH'"
-bash ./MODIFY.SH -l TESTING MODIFY.SH MODIFY_EXAMPLES.SH
-echo
-ls
 
 
 

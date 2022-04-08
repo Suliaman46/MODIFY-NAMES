@@ -49,22 +49,29 @@ updateName() {
 	fileName=`basename "$1"`
 	dirName=`dirname "$1"`
 	
-	if [ $l == 1 ]; then
-		#lowercase "$1"
-		temp=$(echo "$fileName" | tr 'A-Z' 'a-z')
-	elif [ $u == 1 ]; then
-		#uppercase "$1"
-		temp=$(echo "$fileName" | tr 'a-z' 'A-Z')
+	#echo $fileName
+	if [ "$fileName" = "modify.sh" ]; then
+		echo "Cannot change name of the program itself"
+		
 	else
-		#sedPattern "$1"
-		temp=$(echo "$fileName" | sed "$SEDPATTERN" 2>&1)
-	fi
-	result="$dirName/$temp"
-	if [ -f "$result" ] || [ -d "$result" ]; then
-		echo "The "$result" name exists"
-	else
-	mv "$1" "$result"
-	echo "Changed from \""$1"\" to \""$result"\" "
+	
+		if [ $l == 1 ]; then
+			#lowercase "$1"
+			temp=$(echo "$fileName" | tr 'A-Z' 'a-z')
+		elif [ $u == 1 ]; then
+			#uppercase "$1"
+			temp=$(echo "$fileName" | tr 'a-z' 'A-Z')
+		else
+			#sedPattern "$1"
+			temp=$(echo "$fileName" | sed "$SEDPATTERN" 2>&1)
+		fi
+		result="$dirName/$temp"
+		if [ -f "$result" ] || [ -d "$result" ]; then
+			echo "The "$result" name exists"
+		else
+		mv "$1" "$result"
+		echo "Changed from \""$1"\" to \""$result"\" "
+		fi
 	fi
 
 }
