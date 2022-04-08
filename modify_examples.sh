@@ -1,4 +1,16 @@
-#!/bin/sh
+#!/bin/bash
+
+
+pause() {
+	echo
+	echo "Continue?"
+	select yn in "Yes" "No"; do
+	    case $yn in
+		Yes ) break;;
+		No ) exit;;
+	    esac
+	done
+}
 
 rm -r testing
 mkdir testing
@@ -28,43 +40,57 @@ echo "Before any Operation"
 ls -R  
 
 #1.
-echo "\n 1. Making all of dir1 uppercase recursively - 'modify.sh -r -u dir1' \n"
+echo
+echo "1. Making all of dir1 uppercase recursively - 'modify.sh -r -u dir1' \n"
 
 bash ../modify.sh -r -u dir1
-echo "\nAfter Completion"
+echo
+echo "After Completion"
 ls -R
 
+pause
 
 #2. 
-echo "\n 2. Making files in dir2 and itself uppercase without recursion - 'modify.sh -u dir2/file4.txt dir2/file5.txt dir2' \n"
+echo
+echo "2. Making files in dir2 and itself uppercase without recursion - 'modify.sh -u dir2/file4.txt dir2/file5.txt dir2' \n"
 
 bash ../modify.sh -u dir2/file4.txt dir2/file5.txt dir2
-echo "\nAfter Completion"
+echo
+echo "After Completion"
 
-echo "\n 2.1 Please note for this case the order is important and if the user attempted 'modify.sh -u dir2 dir2/file4.txt dir2/file5.txt' the name of the dir2 would first be changed to DIR2 and then the program would not be able to find the files dir2/file4.txt & dir2/file5.txt"
+echo
+echo "2.1 Please note for this case the order is important and if the user attempted 'modify.sh -u dir2 dir2/file4.txt dir2/file5.txt' the name of the dir2 would first be changed to DIR2 and then the program would not be able to find the files dir2/file4.txt & dir2/file5.txt"
 ls -R
 
+pause
 #3
-echo "\n 3. Recursively making directories DIR1 & DIR2 and everything in them lowercase  - 'modify.sh -r -l DIR1 DIR2' \n"
+echo
+echo "3. Recursively making directories DIR1 & DIR2 and everything in them lowercase  - 'modify.sh -r -l DIR1 DIR2' \n"
 
 bash ../modify.sh -r -l DIR1 DIR2
 echo "\nAfter Completion"
 ls -R
 
+pause
 #4
-echo "\n 4. Recursively using sed to change names in dir2 - 'modify.sh -r s/file/mile/' \n"
+echo
+echo "4. Recursively using sed to change names in dir2 - 'modify.sh -r s/file/mile/' \n"
 
 bash ../modify.sh -r s/file/mile/ dir2
-echo "\nAfter Completion"
+echo
+echo "After Completion"
 ls -R
 
+pause
 #5
-echo "\n 5. Attempting to change name but file already exists- 'modify.sh -l dir3/oppexists' \n"
+echo
+echo "5. Attempting to change name but file already exists- 'modify.sh -l dir3/oppexists' \n"
 
 bash ../modify.sh -l dir3/oppexists
 echo "\nAfter Completion"
 ls -R
 
+pause
 #6
 echo "\n 6. Attempting to change name but file does not exist- 'modify.sh -l dir3/newFile' \n"
 
@@ -79,6 +105,7 @@ bash ../modify.sh -r 's/\.txt/\.newext/' ./
 echo "\nAfter Completion"
 ls -R
 
+pause
 #8
 echo "\n 8. Try to operate on empty directory - '../modify.sh -r -l dir3' \n"
 
@@ -86,6 +113,7 @@ bash ../modify.sh -r -l dir3
 echo "\nAfter Completion"
 ls -R
 
+pause
 #9 
 echo "\n 9. Making everything in the root directory uppercase recursively - 'modify.sh -r -u ./' \n"
 
